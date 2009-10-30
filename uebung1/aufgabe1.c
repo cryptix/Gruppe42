@@ -14,12 +14,10 @@ int main() {
 	/* Gibt 2 neue Zeilen, den String "Hallo TUHH!" und nochmal 2 neue Zeilen aus */
 	printf("\n\nHallo TUHH!\n\n");
 	
-	/* Weist Variable a den Wert 22 und Variable b den Wert 20 */
-	a = 22; b = 20;
+	a = 22; b = 20; /* Weist Variable a den Wert 22 und Variable b den Wert 20 zu */
 	
-	/* Gibt den String "Die Antwort ist: ", ein Tabulator, ein Platzhalter für ein Dezimal Wert und 2 neue Zeilen */
+	/* Gibt den String "Die Antwort ist: ", einen Tabulator, einen Platzhalter für ein Dezimal Wert und 2 neue Zeilen aus */
 	printf("Die Antwort ist: \t %d \n\n", a+b);
 	
-	/* Gibt den Wert 0 zurück */
-	return 0;
+	return 0; /* Gibt den Wert 0 zurück */
 }
