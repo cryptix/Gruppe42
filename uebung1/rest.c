@@ -1,8 +1,9 @@
-/* Rechnet den Rest von Eingabe a und b ohne Modulo Operator
- *
+/* rest.c
+ * Prozedurale Programmierung, ‹bungsblatt 1 - Aufgabe 3
+ * 
  * Gruppe 42:
  * - Henry Bubert
- * - Jannik Theiß
+ * - Jannik Theiﬂ
  * - Jan Winkelmann
  */
 #include <stdio.h>
@@ -15,7 +16,7 @@
 int modulo(int a, int b); 
 
 int main(int argc, char *argv[]) {
-	int a, b;
+	int a, b; /* Zwei Variablendeklarationen vom Typ int */
 	
     /* Sicher stellen das a und b auch eingegeben wurden, Fehlermeldung und Abbruch wenn nicht */
 	if(argc < 3) {
@@ -23,32 +24,37 @@ int main(int argc, char *argv[]) {
 		return -1;
 	}
 	
-    /* atoi() uebersetzt ASCII-Zeichenketten in Integer
-     * argv[] ist das Array welches die Eingabe(n) von der Kommandozeile bereit stellt
+    /* atoi() ¸bersetzt ASCII-Zeichenketten in Integer
+     * argv[] ist das Array welches die Eingabe(n) von der Kommandozeile bereit h‰llt
      */
 	a = atoi(argv[1]);
 	b = atoi(argv[2]);
 	
-    /* Ueberpruefen ob a oder b gleich Null sind, falls ja Fehlermeldung und Abbruch */
+    /* ‹berpr¸fen ob a oder b gleich Null sind, falls ja Fehlermeldung und Abbruch */
 	if (a == 0 || b == 0) {
 		fprintf(stderr, "Bitte Werte ungleich 0 eingeben.\n");
 		return -2;
 	}
 	
-	printf("Eingabe:\t%d %d\n",a, b);
-	printf("modulo(a,b):\t%d\n", modulo(a,b));
-	printf("a%%b:\t\t%d\n",a%b);
+	/* Ausgabe der Eingabe von a und b und des modulo() Funtkionsaufrufes */
+	printf("modulo(%d,%d):\t%d\n", a, b, modulo(a,b));
+	
+	/* Ausgabe der Eingabe von a und b und der Mobuloberechnung mit Hilfe des %-Operators zur Kontrolle */
+	printf("%d%%%d:\t\t%d\n", a, b, a%b);
 	
 	return 0;
 } /* main */
 
-/* Funktionsdefinition */
+/* Funktionsdefinition
+ * Rechnet den Rest von a und b ohne Modulooperator
+ * Gibt den Betrag des Restes zur¸ck
+ */
 int modulo(int a, int b) {
-	int m; /* Variablen deklaration vom typ int */
+	int m; /* Variablendeklaration vom Typ int */
 	
-    /* Rest berechnung unter Ausnutzung von Integerteilung */
+    /* Restberechnung unter Ausnutzung von Integerteilung */
 	m = a - (a/b)*b;
 	
-    /* Rueckgabe Wert mit Betrag. Wenn m < 0 gib m * -1 aus, sonst m */
+    /* R¸ckgabe von m mit Betrag. Wenn m < 0 gib m * -1 zur¸ck, sonst m */
 	return m < 0 ? -1 * m : m;
 } /* modulo */
