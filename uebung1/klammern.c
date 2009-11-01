@@ -11,11 +11,11 @@
 #include <stdio.h>
 
 #define GRENZE 3   /* Grenze als Konstante/Makro definieren */
-#define PERMCNT 5  /* Anzahl der Klammerkombinationen definieren */
+#define PERMCNT 6  /* Anzahl der Klammerkombinationen definieren */
 
-void huebschAusgeben(int a,int b,int c,int d,int e, short int perms[]); 
-short int notRandom(short int max);  
+short int notRandom(int max);  
 int noEquals(short int arr[]); 
+void printPretty(int a,int b,int c,int d,int e, short int perms[]); 
 
 int main(void){
 	/* Deklariert a, b, c, d und e vom Typ short int,
@@ -38,7 +38,7 @@ int main(void){
 	 * wird verwendet um unterschiedliche Belegung 
 	 * fuer die Variablen a bis f zu liefern.
 	 */
-	short int rand = notRandom(750);
+	short int rand = notRandom(500);
 
 	/* Die Hauptschleife wird mit a,b,c,d und e = -GRENZE initialisiert,
 	 * laeuft solange a kleiner ist als die Grenze,
@@ -64,13 +64,14 @@ int main(void){
 		perms[2] = (a*b+c)/(d-e);
 		perms[3] = (a*(b+c))/(d-e);
 		perms[4] = a*(b+c)/d-e;
+        perms[5] = a*(b+c/d)-e;
 
 		/* Dieser Block ueberprueft ob die ergebnisse sich unterscheiden
 		 * und gibt eine mehr oder weniger zufaellige Kombination der Variablen aus
 		 */
 		if(noEquals(perms)==0 && rand == treffer++) {
 			/* Saubere Ausgabe der Permutationen und der Ergebnisse */
-			huebschAusgeben(a,b,c,d,e,perms); 
+			printPretty(a,b,c,d,e,perms); 
 
 			/* Das Programm nach der ersten Ausgabe beenden */
 			return 0;
@@ -113,7 +114,7 @@ int noEquals(short int arr[]){
 } 
 
 /* gibt a, b, c, d, e und die Terme huebsch aus. */
-void huebschAusgeben(int a, int b, int c, int d, int e, short int perms[]){
+void printPretty(int a, int b, int c, int d, int e, short int perms[]){
 	/* a bis e mit ihren Werten ausgegeben */
 	printf("a=%d, b=%d, c=%d, d=%d, e=%d\n\n", a, b, c, d, e); 
 
@@ -123,4 +124,5 @@ void huebschAusgeben(int a, int b, int c, int d, int e, short int perms[]){
 	printf("(a*b+c)/(d-e)\t= %d\n",   perms[2]);
 	printf("(a*(b+c))/(d-e)\t= %d\n", perms[3]);
 	printf("a*(b+c)/d-e\t= %d\n",     perms[4]);
+    printf("a*(b+c/d)-e\t= %d\n",     perms[5]);
 }
