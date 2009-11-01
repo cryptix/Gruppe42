@@ -27,7 +27,6 @@ int main(void){
 	 * wird fuer die Ergebnisse der Terme verwendet.
 	 */
 	short int perms[PERMCNT];
-<<<<<<< HEAD
 	
 	/* Deklariert und Definiert 'treffer' vom Typ short int,
 	 * wird fuer die Anzahl der unterschiedlichen Termwerte verwendet.
@@ -35,15 +34,6 @@ int main(void){
 	 */
 	short int treffer = 0;
 	
-=======
-	
-	/* Deklariert und Definiert 'treffer' vom Typ short int,
-	 * wird fuer die Anzahl der unterschiedlichen Termwerte verwendet.
-	 * Am Anfang noch nie, also 0
-	 */
-	short int treffer = 0;
-	
->>>>>>> 7b742df728e26085348188587d60671f7a2ec6ed
 	/* Deklariert und Definiert 'rand' vom Typ short int,
 	 * wird verwendet um unterschiedliche Belegung 
 	 * fuer die Variablen a bis f zu liefern.
