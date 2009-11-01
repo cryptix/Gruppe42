@@ -1,4 +1,7 @@
-/* Findet heraus, bei welchen a,b,c,d,e die Terme 'perms[]' unterschiedlich sind.
+/* klammern.c
+ * Prozedurale Programmierung, Übungsblatt 1 - Aufgabe 2
+ *
+ * Findet heraus, bei welchen a,b,c,d,e die Terme 'perms[]' unterschiedlich sind.
  *
  * von Gruppe 42:
  *   Jannik Theiß
@@ -13,6 +16,7 @@
 #define GRENZE 3   /* Grenze als Konstante/Makro definieren */
 #define PERMCNT 6  /* Anzahl der Klammerkombinationen definieren */
 
+/* Funktions Deklarationen */
 short int notRandom(int max);  
 int noEquals(short int arr[]); 
 void printPretty(int a,int b,int c,int d,int e, short int perms[]); 
@@ -79,7 +83,7 @@ int main(void){
 	}
 
 	return 0;
-}
+} /* main */
 
 /* eine mehr oder weniger zufaellige Zahl ausgeben */
 short int notRandom(int max){
@@ -88,7 +92,7 @@ short int notRandom(int max){
 	while( (ret %= max) > max ); /* solange ret groesser ist als gewollt,  */
 	
 	return (short int) ret; /* und dann zurueckgeben */
-}
+} /* notRandom */
 
 /* Untersucht ein Array auf gleiche Inhalte.
  * Wenn zwei gleich sind gib 1 zureuck, sonst 0.
@@ -111,7 +115,7 @@ int noEquals(short int arr[]){
 	}
 
 	return 0; /* keine gleichen gefunden */
-} 
+} /* noEquals */
 
 /* gibt a, b, c, d, e und die Terme huebsch aus. */
 void printPretty(int a, int b, int c, int d, int e, short int perms[]){
@@ -125,4 +129,4 @@ void printPretty(int a, int b, int c, int d, int e, short int perms[]){
 	printf("(a*(b+c))/(d-e)\t= %d\n", perms[3]);
 	printf("a*(b+c)/d-e\t= %d\n",     perms[4]);
     printf("a*(b+c/d)-e\t= %d\n",     perms[5]);
-}
+} /* printPretty */
