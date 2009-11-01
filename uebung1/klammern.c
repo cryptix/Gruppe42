@@ -4,6 +4,8 @@
 *   Jannik Theiß
 *   Henry Bubert
 *   Jan Winkelmann
+	a=b=c=d=e=-GRENZE; /*	a,b,c,d und e werden zu Beginn auf das negative 
+												Ebenbild der Grenze gesetzt */
 *
 */
 
