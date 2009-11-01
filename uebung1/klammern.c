@@ -18,63 +18,63 @@ short int notRandom(short int max);
 int noEquals(short int arr[]); 
 
 int main(void){
-    /* Deklariert a, b, c, d und e vom Typ short int,
-     * werden fuer die Klammerkombinationen deklarieren 
-     */
-	short int a,b,c,d,e;     
+	/* Deklariert a, b, c, d und e vom Typ short int,
+	 * werden fuer die Klammerkombinationen deklarieren 
+	 */
+	short int a,b,c,d,e;
 
-    /* Deklaration des short int Arrays 'perms', mit PERMCNT Elementen,
-     * wird fuer die Ergebnisse der Terme verwendet.
-     */
-    short int perms[PERMCNT];
-
-    /* Deklariert und Definiert 'treffer' vom Typ short int,
-     * wird fuer die Anzahl der unterschiedlichen Termwerte verwendet.
-     * Am Anfang noch nie, also 0
-     */
-	short int treffer = 0; 
-                           
+	/* Deklaration des short int Arrays 'perms', mit PERMCNT Elementen,
+	 * wird fuer die Ergebnisse der Terme verwendet.
+	 */
+	short int perms[PERMCNT];
+	
+	/* Deklariert und Definiert 'treffer' vom Typ short int,
+	 * wird fuer die Anzahl der unterschiedlichen Termwerte verwendet.
+	 * Am Anfang noch nie, also 0
+	 */
+	short int treffer = 0;
+	
 	/* Deklariert und Definiert 'rand' vom Typ short int,
-     * wird verwendet um unterschiedliche Belegung 
-     * fuer die Variablen a bis f zu liefern.
-     */
-    short int rand = notRandom(750); 
+	 * wird verwendet um unterschiedliche Belegung 
+	 * fuer die Variablen a bis f zu liefern.
+	 */
+	short int rand = notRandom(750);
 
 	/* Die Hauptschleife wird mit a,b,c,d und e = -GRENZE initialisiert,
-     * laeuft solange a kleiner ist als die Grenze,
-     * und in jedem Durchgang wird e inkrementiert.
-     * Wenn e die Grenze erreicht, wird d inkrementiert.
-     * Wenn d die Grenze erreicht, wird c inkrementiert. usw.	
-     */
+	 * laeuft solange a kleiner ist als die Grenze,
+	 * und in jedem Durchgang wird e inkrementiert.
+	 * Wenn e die Grenze erreicht, wird d inkrementiert.
+	 * Wenn d die Grenze erreicht, wird c inkrementiert. usw.
+	 */
 	for(a=b=c=d=e=-GRENZE; a<GRENZE; e++) {
 		if(e==GRENZE){ e=-GRENZE; d++; }	   
 		if(c==GRENZE){ c=-GRENZE; b++; }	   
 		if(d==GRENZE){ d=-GRENZE; c++; }      
 		if(b==GRENZE){ b=-GRENZE; a++; }      
 
-        /* Um zu verhindern, dass durch 0 geteilt wird */
+		/* Um zu verhindern, dass durch 0 geteilt wird */
 		if(d==e || d ==0){e++; continue;} 
 
 		/* a bis e sind zugewiesen,
-         * jetzt wird in jedem durchgang der Wert der Terme ausgerechnet 
+		 * jetzt wird in jedem durchgang der Wert der Terme ausgerechnet 
 		 * und im Array gespeichert
-         */
+		 */
 		perms[0] = a*b+c/d-e;
 		perms[1] = (a*b+c)/d-e;
 		perms[2] = (a*b+c)/(d-e);
 		perms[3] = (a*(b+c))/(d-e);
 		perms[4] = a*(b+c)/d-e;
 
-        /* Dieser Block ueberprueft ob die ergebnisse sich unterscheiden
-         * und gibt eine mehr oder weniger zufaellige Kombination der Variablen aus
-         */
+		/* Dieser Block ueberprueft ob die ergebnisse sich unterscheiden
+		 * und gibt eine mehr oder weniger zufaellige Kombination der Variablen aus
+		 */
 		if(noEquals(perms)==0 && rand == treffer++) {
-            /* Saubere Ausgabe der Permutationen und der Ergebnisse */
+			/* Saubere Ausgabe der Permutationen und der Ergebnisse */
 			huebschAusgeben(a,b,c,d,e,perms); 
 
-            /* Das Programm nach der ersten Ausgabe beenden */
+			/* Das Programm nach der ersten Ausgabe beenden */
 			return 0;
-        }
+		}
 	}
 
 	return 0;
@@ -95,17 +95,17 @@ short int notRandom(int max){
 int noEquals(short int arr[]){
 	int i,j;
 
-    /* Um festzustellen ob arr[] zwei gleiche Werte enthaehllt,
-     * benutzen wir 2 verschachtelte for-Schleifen
-     * und suchen nach gleichen Werten mit unterschiedlichen Indizes.
-     */
+	/* Um festzustellen ob arr[] zwei gleiche Werte enthaehllt,
+	 * benutzen wir 2 verschachtelte for-Schleifen
+	 * und suchen nach gleichen Werten mit unterschiedlichen Indizes.
+	 */
 	for(i=0; i<PERMCNT; i++){        
 		for(j=0; j<PERMCNT; j++){
-            /* Damit wir nicht ein Element mit sich selbst vergleichen */
-            if(i==j) continue;
+			/* Damit wir nicht ein Element mit sich selbst vergleichen */
+			if(i==j) continue;
 
-            /* Falls zwei gleich sind... */
-            if(arr[i] == arr[j]) return 1;
+			/* Falls zwei gleich sind... */
+			if(arr[i] == arr[j]) return 1;
 		}
 	}
 
@@ -114,10 +114,10 @@ int noEquals(short int arr[]){
 
 /* gibt a, b, c, d, e und die Terme huebsch aus. */
 void huebschAusgeben(int a, int b, int c, int d, int e, short int perms[]){
-    /* a bis e mit ihren Werten ausgegeben */
+	/* a bis e mit ihren Werten ausgegeben */
 	printf("a=%d, b=%d, c=%d, d=%d, e=%d\n\n", a, b, c, d, e); 
 
-    /* Termpermutationen mit ihren Werten ausgeben */
+	/* Termpermutationen mit ihren Werten ausgeben */
 	printf("a*b+c/d-e\t= %d\n",       perms[0]);      
 	printf("(a*b+c)/d-e\t= %d\n",     perms[1]);
 	printf("(a*b+c)/(d-e)\t= %d\n",   perms[2]);
