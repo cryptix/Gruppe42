@@ -13,9 +13,9 @@ hallo.c: In function ‘main’:
 hallo.c:23: warning: control reaches end of non-void function
 
 Das liegt daran, dass als Datentyp int angegeben ist, und nichts zurueckgegeben wird. Das ist im alten Standard 
-nur bei Funktionen ohne Typ (void) vorgesehen, daher "end of non-void function".
+nur bei Funktionen ohne Rückgabewert (void) vorgesehen, daher "end of non-void function".
 
-Wenn man sowohl das Semikolon loescht (diesmal ein anderes) und die return-Anweisung weglaesst, diesmal ohne -Wall -Wextra, dann kommt:
+Wenn man sowohl das Semikolon löscht (diesmal ein anderes) und die return-Anweisung weglaesst, diesmal ohne -Wall -Wextra, dann kommt:
 hallo.c: In function ‘main’:
 hallo.c:17: error: expected ‘;’ before ‘a’ 
 

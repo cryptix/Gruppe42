@@ -1,6 +1,6 @@
-/* 
- * hallo.c
- * 
+/* hallo.c
+ * Prozedurale Programmierung, Übungsblatt 1 - Aufgabe 1 
+ *
  * Gruppe 42:
  * - Henry Bubert	   
  * - Jannik Theiß	 
