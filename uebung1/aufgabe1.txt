@@ -1,0 +1,24 @@
+von Jan Winkelmann, Henry Bubert, Jannik Theiß (Gruppe 42)
+
+Das Semikolon vor der return-Anweisung fehlt. Da er das erst merkt, als eine 
+unerwartete Anweisung kam, ist die Zeilennummer nicht die der Zeile mit dem fehlenden Semikolon.
+
+aufgabe1.c: In function ‘main’:
+aufgabe1.c:22: error: expected ‘;’ before ‘return’
+
+
+Wenn man die return-Anweisung entfernt und den Code mit -std=99 kompiliert, kommt keine Fehlermeldung.
+Wenn man aber -std=89 verwendet, meldet der Compiler:
+aufgabe1.c: In function ‘main’:
+aufgabe1.c:23: warning: control reaches end of non-void function
+
+Das liegt daran, dass als Datentyp int angegeben ist, und nichts zurueckgegeben wird. Das ist im alten Standard 
+nur bei Funktionen ohne Typ (void) vorgesehen, daher "end of non-void function".
+
+Wenn man sowohl das Semikolon loescht (diesmal ein anderes) und die return-Anweisung weglaesst, diesmal ohne -Wall -Wextra, dann kommt:
+aufgabe1.c: In function ‘main’:
+aufgabe1.c:17: error: expected ‘;’ before ‘a’ 
+
+Das kommt daher, dass a das erste Zeichen nach der Anweisung ohne Semikolon ist. Da -W die Menge der Warnungen angibt, ist die Warnung,
+dass man am Ende einer non-void Funktion nicht returned hat wieder weg.
+
