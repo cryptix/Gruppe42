@@ -22,3 +22,4 @@ hallo.c:17: error: expected ‘;’ before ‘a’
 Das kommt daher, dass a das erste Zeichen nach der Anweisung ohne Semikolon ist. Da -W die Menge der Warnungen angibt, ist die Warnung,
 dass man am Ende einer non-void Funktion nicht returned hat wieder weg.
 
+Lässt man nur das retun weg und kompiliert ohne -Wall -Wextra wird das Programm ohne Fehlermeldung kompiliert.
