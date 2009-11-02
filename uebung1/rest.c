@@ -1,9 +1,9 @@
 /* rest.c
- * Prozedurale Programmierung, Übungsblatt 1 - Aufgabe 3
+ * Prozedurale Programmierung, Ãœbungsblatt 1 - Aufgabe 3
  * 
  * Gruppe 42:
  * - Henry Bubert
- * - Jannik Theiß
+ * - Jannik TheiÃŸ
  * - Jan Winkelmann
  */
 #include <stdio.h>
@@ -24,13 +24,13 @@ int main(int argc, char *argv[]) {
 		return -1;
 	}
 	
-    /* atoi() übersetzt ASCII-Zeichenketten in Integer
-     * argv[] ist das Array welches die Eingabe(n) von der Kommandozeile bereit hällt
+    /* atoi() Ã¼bersetzt ASCII-Zeichenketten in Integer
+     * argv[] ist das Array welches die Eingabe(n) von der Kommandozeile bereit hÃ¤llt
      */
 	a = atoi(argv[1]);
 	b = atoi(argv[2]);
 	
-    /* Überprüfen ob a oder b gleich Null sind, falls ja Fehlermeldung und Abbruch */
+    /* ÃœberprÃ¼fen ob a oder b gleich Null sind, falls ja Fehlermeldung und Abbruch */
 	if (a == 0 || b == 0) {
 		fprintf(stderr, "Bitte Werte ungleich 0 eingeben.\n");
 		return -2;
@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
 
 /* Funktionsdefinition
  * Rechnet den Rest von a und b ohne Modulooperator
- * Gibt den Betrag des Restes zurück
+ * Gibt den Betrag des Restes zurÃ¼ck
  */
 int modulo(int a, int b) {
 	int m; /* Variablendeklaration vom Typ int */
@@ -55,6 +55,6 @@ int modulo(int a, int b) {
     /* Restberechnung unter Ausnutzung von Integerteilung */
 	m = a - (a/b)*b;
 	
-    /* Rückgabe von m mit Betrag. Wenn m < 0 gib m * -1 zurück, sonst m */
+    /* RÃ¼ckgabe von m mit Betrag. Wenn m < 0 gib m * -1 zurÃ¼ck, sonst m */
 	return m < 0 ? -1 * m : m;
 } /* modulo */
