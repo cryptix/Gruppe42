@@ -55,6 +55,9 @@ int modulo(int a, int b) {
     /* Restberechnung unter Ausnutzung von Integerteilung */
 	m = a - (a/b)*b;
 	
-    /* Rückgabe von m mit Betrag. Wenn m < 0 gib m * -1 zurück, sonst m */
-	return m < 0 ? -1 * m : m;
+	/*Betrag von m: Ein Teil des Terms wird durch Integerdivision jeweils 0, der andere 1*m oder 1*(-m)*/
+	m = ((2 * m + 2) / (2 * m + 1)) * m + ((2 * m - 2) / (2 * m - 1)) * (-m);
+	
+    /* Rückgabe von m.*/
+	return m;
 } /* modulo */
