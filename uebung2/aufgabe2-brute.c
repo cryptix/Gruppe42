@@ -10,7 +10,7 @@
 
 #define SIZE 3
 
-enum { MAX, CUR, MIN };
+enum { MAX=0, CUR, MIN };
 
 int main(void) {
     short int sInt[SIZE];
