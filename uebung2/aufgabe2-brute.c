@@ -17,20 +17,21 @@ int main(void) {
     long  int lInt[SIZE];
     unsigned short int usInt[SIZE];
     unsigned long  int ulInt[SIZE];
-
-    /* Solange hoch zaehlen bis die Graenze erreicht wird und wir im Negativen sind */
-    for(sInt[CUR] = 0; sInt[CUR] >= 0; sInt[CUR]++);
-    sInt[MIN] = sInt[CUR];
-    /* Das ganze nur umgekehrt */
-    for(sInt[CUR] = 0; sInt[CUR] <= 0; sInt[CUR]--);
-    sInt[MAX] = sInt[CUR];
+	
+	/* Da die kleinste Zahl eines signed int immer -1 mal eine Potenz von 2 ist,
+	 wird bei der Multiplikation mit 2 vor dem Wrap-around der kleinste Wert erreicht */
+	for (sInt[CUR] = -2; sInt[CUR] < 0; sInt[CUR] *= 2) {
+		sInt[MIN] = sInt[CUR];
+	}
+	/* Nach dem Wrap-around folgt der größte Wert */
+	sInt[MAX] = sInt[MIN] - 1;
     printf("\nshort int\n\tmin:%d\n\tmax:%d\n", sInt[MIN], sInt[MAX]);
  
     /* Analog dazu mit long int */
-    for(lInt[CUR] = 0; lInt[CUR] >= 0; lInt[CUR]++);
-    lInt[MIN] = lInt[CUR];
-    for(lInt[CUR] = 0; lInt[CUR] <= 0; lInt[CUR]--);
-    lInt[MAX] = lInt[CUR];
+	for (lInt[CUR] = -2; lInt[CUR] < 0; lInt[CUR] *= 2) {
+		lInt[MIN] = lInt[CUR];
+	}
+    lInt[MAX] = lInt[MIN] - 1;
     printf("\nlong int\n\tmin:%ld\n\tmax:%ld\n", lInt[MIN], lInt[MAX]);
               
     /* unsigned ints bewegen sich von 0 bis MAX
@@ -44,6 +45,6 @@ int main(void) {
     ulInt[MIN] = 0;
     ulInt[MAX] = ulInt[MIN]-1;
     printf("\nunsigned long int\n\tmin:%lu\n\tmax:%lu\n", ulInt[MIN], ulInt[MAX]);
- 
+	
     return 0;
 }
