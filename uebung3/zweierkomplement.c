@@ -15,15 +15,15 @@ int main() {
 	unsigned int b[16] = {0,1,0,1,1,1,0,1,1,1,1,1,0,1,1,0};
 	int i;
 	
-	for (bitMask = 0x8000; bitMask > 0; bitMask = bitMask >> 1) {
+	for (bitMask = 0x8000; bitMask > 0; bitMask >>= 1) {
 		printf("%d", (a & bitMask) != 0);
 	}
 	
 	printf("\n");
 	
 	for (i = 0; i < 16; i++) {
-		c = c << 1;
-		c = c | b[i];
+		c <<= 1;
+		c |= b[i];
 	}
 	
 	printf("%d\n", c);
