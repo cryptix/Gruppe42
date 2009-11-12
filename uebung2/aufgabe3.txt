@@ -1,0 +1,10 @@
+Von Jan Winkelmann, Jannik Theiß und Henry Bubert
+
+Wir haben uns fuer gdb entschieden. Den Haltepunkt auf printf setzen kann man mit `break printf'.
+Wenn man dann das Programm mit `run' startet, haelt er bei printf an. Wenn man mit `continue' fortsetzt, werden die lokalen
+Variablen angezeigt. Dies kann auch explizit mit `info locals' getan werden.
+
+printf ist in /lib/libc.so.6
+
+alle Register kann man sich mit `info all-registers' ausgeben lassen - Den grossteil braucht man jedoch nicht, 
+`info registers' tut es im allgemeinen auch.
