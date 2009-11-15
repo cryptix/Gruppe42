@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
 		a = atoi(argv[1]);
 		
 		/* Input Bin-Number */
-		for (i = 0; i < 16; i++) {
+		for (i = 0; i < 16 && argv[2][i] != 0; i++) {
 			bIn[i] = (argv[2][i] == 48) ? 0 : 1;
 		}
 		/* Bits sortieren */
