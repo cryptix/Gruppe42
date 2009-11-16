@@ -1,5 +1,5 @@
-/* zweierkomplement.c
- * Prozedurale Programmierung, Übungsblatt 3 - Aufgabe 4
+/* aufgabe1.c
+ * Prozedurale Programmierung, Übungsblatt 4 - Aufgabe 1
  *
  * Gruppe 42:
  * - Henry Bubert	   
