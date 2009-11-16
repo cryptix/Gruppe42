@@ -14,6 +14,8 @@ int main() {
 	volatile double d1 = 1, d2;
 	int i = 0;
 	
+	printf("Maschinengenauigkeit für die Datentypen\n");
+	
 	do {
 		i--; /* Zählvariable für die Schleifendurchgänge. f1 entspricht immer 2^i
 			(pro Schleifendurchgang wird f1 mit 2^-1 multipliziert) */
@@ -21,7 +23,7 @@ int main() {
 		f2 = 1 + f1; /* Sobald dieser Wert 1 ist, ist der größte Wert für f1 gefunden */
 	} while (f2 != 1);
 	
-	printf("float:\t2^%d = %.50e\n", i, f1);
+	printf("- float:\t2^%d = %.50e\n", i, f1);
 	
 	/* Analog dazu für double */
 	i = 0;
@@ -31,7 +33,7 @@ int main() {
 		d2 = 1 + d1;
 	} while (d2 != 1);
 	
-	printf("double:\t2^%d = %.50e\n", i, d1);
+	printf("- double:\t2^%d = %.50e\n", i, d1);
 
 	
 	return 0;
