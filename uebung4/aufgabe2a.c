@@ -42,22 +42,20 @@ int main() {
 }
 
 double fac(unsigned int i) {
-	unsigned long int o = 1;
+	double o = 1;
 
-	for (; i > 1; i--) {
-		o *= i;
-	}
+    while(i > 1)
+        o *= i--;
 
-	return (double)o;
+	return o;
 }
 
 double fac2(unsigned int i) {
-	unsigned long int o = 1;
+	double o = 1;
 
-	for (; i > 1; i--) {
-		o *= i*i;
-	}
+    o = fac(i);
+    o *= o;
 
-	return (double)o;
+	return o;
 }
 
