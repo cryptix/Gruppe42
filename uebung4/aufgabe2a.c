@@ -8,9 +8,6 @@
  *
 */
 #include <stdio.h>
-#include <math.h>
-
-double fac(unsigned int i); /* Berechnet i! */
 
 int main() {
 	double pi = 0, piPre, dA, dB, dC, dD;
@@ -57,13 +54,3 @@ int main() {
 	
 	return 0;
 }
-
-double fac(unsigned int i) {
-	double o = 1;
-
-    while(i > 1)
-        o *= i--;
-
-	return o;
-}
-
