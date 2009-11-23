@@ -13,12 +13,19 @@
 double fac(unsigned int i); /* Berechnet i! */
 
 int main() {
-	double pi = 0, piPre;
-	int i = 0;
+	double pi = 0, piPre, dA, dB, dC, dD;
+	int i = 0, iA;
 	
+	dA = 1.0 / 2;
+	dB = 1.0 / 3;
+	dC = 1;
 	do {
 		piPre = pi; /* Vorherigen Wert für die Abbruchsbedingung speichern */
-		pi += (i%2 ? -1 : 1) * (pow(2, -2*i-1)+pow(3, -2*i-1)) / (2*i+1); /* Zusammengafesster Summand der Summenformel wird jeweils addiert */
+		pi += (i%2 ? -1 : 1) * (dA+dB) / dC; /* Zusammengafesster Summand der Summenformel wird jeweils addiert */
+
+		dA /= 4;
+		dB /= 9;
+		dC += 2;
 		
 		i++;
 	} while (piPre != pi); /* Wenn sich der Wert nicht mehr ändert, ist die bestmögliche Präzision erreicht */
@@ -27,12 +34,23 @@ int main() {
 	
 	i = 0;
 	pi = 0;
+	dA = 1;
+	dB = 1;
+	dC = 7 / 10.0;
+	dD = 237 / 3125.0;
+	iA = 1;
 	/* Analoges Verfahren für den zweiten Algorithmus */
 	do {
 		piPre = pi;
-		pi += (1 << (2*i)) * fac(i)*fac(i) / fac(2*i+1)*(5*pow(1/7.0, 2*i+1)/pow(50/49.0, i+1) + 2*pow(3/79.0, 2*i+1)/pow(6250/6241.0, i+1));
+		pi += iA * dA / dB * (dC + dD);
 		
 		i++;
+
+		iA <<= 2; /* = 2^(2*i)*/
+		dA *= i; /* dA/dB = (i!)^2/(2*i+1)!) */
+		dB *= 4*i + 2;
+		dC /= 50; /* = 5 * (1/7)^(2*i+1) / (1 + (1/7)^2)^(i+1) */
+		dD *= 9 / 6250.0; /* = 2 * (3/79)^(2*i+1) / (1 + (3/79)^2)^(i+1) */
 	} while (piPre != pi);
 
 	printf("Algorithmus2:\ni:\t%d\npi:\t%.50f\n\n", i, 4*pi);
