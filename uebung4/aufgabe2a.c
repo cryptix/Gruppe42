@@ -11,7 +11,6 @@
 #include <math.h>
 
 double fac(unsigned int i); /* Berechnet i! */
-double fac2(unsigned int i); /* Berechnet i!^2 */
 
 int main() {
 	double pi = 0, piPre;
@@ -31,7 +30,7 @@ int main() {
 	/* Analoges Verfahren für den zweiten Algorithmus */
 	do {
 		piPre = pi;
-		pi += (1 << (2*i)) * fac2(i) / fac(2*i+1)*(5*pow(1/7.0, 2*i+1)/pow(50/49.0, i+1) + 2*pow(3/79.0, 2*i+1)/pow(6250/6241.0, i+1));
+		pi += (1 << (2*i)) * fac(i)*fac(i) / fac(2*i+1)*(5*pow(1/7.0, 2*i+1)/pow(50/49.0, i+1) + 2*pow(3/79.0, 2*i+1)/pow(6250/6241.0, i+1));
 		
 		i++;
 	} while (piPre != pi);
@@ -42,22 +41,11 @@ int main() {
 }
 
 double fac(unsigned int i) {
-	unsigned long int o = 1;
+	double o = 1;
 
-	for (; i > 1; i--) {
-		o *= i;
-	}
+    while(i > 1)
+        o *= i--;
 
-	return (double)o;
-}
-
-double fac2(unsigned int i) {
-	unsigned long int o = 1;
-
-	for (; i > 1; i--) {
-		o *= i*i;
-	}
-
-	return (double)o;
+	return o;
 }
 

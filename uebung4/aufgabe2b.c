@@ -24,18 +24,19 @@ int main(int argc, char *argv[]) {
 	} else {
 		depth = atol(argv[1]);
 		if(depth < 1) {
+			fprintf(stderr, "Usage: %s <depth>\n", argv[0]);
 			fprintf(stderr, "Couldn't parse input or input is < 1\n");
 			return -1;
 		}
 	}
 
 	printf("Kettenbruch1:\n");
-	printf("iterativ:\tpi = %.50f\n", frac1(depth));/* Pi aus der ersten Funktion ausgeben */
-	printf("rekursiv:\tpi = %.50f\n\n", 4/frac1r(depth, 1, 1));/* Alternativer, rekursiver Algorithmus */
+	printf("iterativ:\tpi ≈ %.50f\n", frac1(depth));/* Pi aus der ersten Funktion ausgeben */
+	printf("rekursiv:\tpi ≈ %.50f\n\n", 4/frac1r(depth, 1, 1));/* Alternativer, rekursiver Algorithmus */
 
 	printf("Kettenbruch2:\n");
-	printf("iterativ:\tpi = %.50f\n", frac2(depth));/* Pi aus der zweiten Funktion ausgeben */
-	printf("rekursiv:\tpi = %.50f\n", frac2r(depth, 1) - 3);/* Alternativer, rekursiver Algorithmus */
+	printf("iterativ:\tpi ≈ %.50f\n", frac2(depth));/* Pi aus der zweiten Funktion ausgeben */
+	printf("rekursiv:\tpi ≈ %.50f\n", frac2r(depth, 1) - 3);/* Alternativer, rekursiver Algorithmus */
 			
 	return 0;
 }
