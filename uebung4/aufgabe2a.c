@@ -19,7 +19,7 @@ int main() {
 	
 	do {
 		piPre = pi; /* Vorherigen Wert für die Abbruchsbedingung speichern */
-		pi += ((i%2 == 0) ? 1 : -1) * (pow(2, -2*i-1)+pow(3, -2*i-1)) / (2*i+1); /* Zusammengafesster Summand der Summenformel wird jeweils addiert */
+		pi += (i%2 ? -1 : 1) * (pow(2, -2*i-1)+pow(3, -2*i-1)) / (2*i+1); /* Zusammengafesster Summand der Summenformel wird jeweils addiert */
 		
 		i++;
 	} while (piPre != pi); /* Wenn sich der Wert nicht mehr ändert, ist die bestmögliche Präzision erreicht */
