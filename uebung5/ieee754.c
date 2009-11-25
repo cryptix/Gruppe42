@@ -34,11 +34,10 @@ void	printieee(ieee754 num);
 
 int main(int argc, char *argv[]) {
 	ieee754 con;
-	float in;
+	float in = -54.0625; /* default value */;
 	
 	if(argc < 2) {
-		fprintf(stderr, "usage: %s <float>", argv[0]);
-		in = 18.4; /* default value */
+		fprintf(stderr, "usage: %s <float>\nusing default %f\n\n", argv[0], in);
 	} else {
 		in = strtof(argv[1], NULL);
 		if(in == 0) {
@@ -87,7 +86,6 @@ ieee754 dec2ieee(float  in) {
 	for(i=EXPLEN-1; i >= 0; i--) {
 		out.exp[i] = (e%2 == 0) ? '0' : '1';
 		e /= 2;
-
 	}
 	out.exp[EXPLEN+1] = '\0';
 
@@ -99,24 +97,17 @@ ieee754 dec2ieee(float  in) {
 
 	/* Mantissen Bits */
 	for(i=0; i <= MANLEN; i++) {
-		printf("m:%f i:%f\n", mant, 1.0/(2<<(i+1)));
 
-		tmp = 1.0/(2<<(i+1));
-
+		tmp = 1.0/(2<<(i));
 		set = ( mant > tmp)  ? 1 : 0;
+
 		out.man[i] = (set==1) ? '1' : '0';
+
+		printf("m:%f a:%f s:%d\n", mant, tmp, set);
 
 		mant -= tmp * set;
 	}
 	out.man[MANLEN] = '\0';
-
-	/* wiki like
-	for(i = 0; i < manlen; i++) {
-		out.man[i] = (i%2 == 0) ? '0' : '1';
-
-	}
-	out.man[manlen] = '\0';
-	*/
 
 	return out;
 } /* dec2ieee */
