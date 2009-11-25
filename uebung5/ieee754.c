@@ -1,0 +1,134 @@
+/* ieee754.c
+ * Prozedurale Programmierung, Übungsblatt 5 - Aufgabe 1 
+ *
+ * Gruppe 42:
+ * - Henry Bubert   
+ * - Jannik Theiß
+ * - Jan Winkelmann
+ */
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define B 127
+
+#define EXPLEN 8
+#define MANLEN 23
+
+/* Typdeklaration
+ * 3 Member vom Typ Char. Mehr braucht man fue 0 und 1 nicht.
+ *
+ * Mit typedef struct kann man statt 'struct name'
+ * im weitern Code einfach 'name' schreiben.
+ */
+typedef struct {
+	char sig;			/* Vorzeichen bit */
+	char exp[EXPLEN+1];	/* Exponent */
+	char man[MANLEN+1];	/* Mantisse */
+} ieee754;
+
+/* Funktions deklaration */
+float   ieee2dec(ieee754 num);
+ieee754 dec2ieee(float num);
+void	printieee(ieee754 num);
+
+int main(int argc, char *argv[]) {
+	ieee754 con;
+	float in;
+	
+	if(argc < 2) {
+		fprintf(stderr, "usage: %s <float>", argv[0]);
+		in = 18.4; /* default value */
+	} else {
+		in = strtof(argv[1], NULL);
+		if(in == 0) {
+			fprintf(stderr, "Conversion failed. See man 2 strtof for the proper way to input numbers.\n");
+			return -1;
+		}
+	}
+
+	con = dec2ieee(in);
+	printieee(con);
+
+	return 0;
+} /* main */
+
+/* Wandelt eine Variable in ieee754 bit Darstellung
+ * in float um, und gibt diese zurück
+ */
+float ieee2dec(ieee754 in) {
+	float out;
+
+
+	return out;
+} /* ieee2dec */
+
+/* Wandelt eine Variable von Float
+ * in ieee754 bit darstellung um
+ */
+ieee754 dec2ieee(float  in) {
+	short int i, e, set;
+	volatile float mant, exp, tmp;
+	ieee754 out;
+
+	/* Vorzeichen Bit */
+	out.sig = (in < 0) ? '1' : '0';
+	in *= (in < 0) ? -1 : 1;	
+
+	/* Exponenten Berechnung */
+	if(in > 1 || in < -1)
+		for(i=0, exp=1; in > exp*2; i++, exp*=2);
+	else
+		for(i=0, exp=1; in < exp; i--, exp/=2);
+
+
+	/* Exponenten Bits */
+	e = i + B;
+	for(i=EXPLEN-1; i >= 0; i--) {
+		out.exp[i] = (e%2 == 0) ? '0' : '1';
+		e /= 2;
+
+	}
+	out.exp[EXPLEN+1] = '\0';
+
+	/* Mantisse */
+	mant = in/exp;
+
+	/* implizit 1 */
+	mant -= 1;
+
+	/* Mantissen Bits */
+	for(i=0; i <= MANLEN; i++) {
+		printf("m:%f i:%f\n", mant, 1.0/(2<<(i+1)));
+
+		tmp = 1.0/(2<<(i+1));
+
+		set = ( mant > tmp)  ? 1 : 0;
+		out.man[i] = (set==1) ? '1' : '0';
+
+		mant -= tmp * set;
+	}
+	out.man[MANLEN] = '\0';
+
+	/* wiki like
+	for(i = 0; i < manlen; i++) {
+		out.man[i] = (i%2 == 0) ? '0' : '1';
+
+	}
+	out.man[manlen] = '\0';
+	*/
+
+	return out;
+} /* dec2ieee */
+
+/* Nimmt ein ieee754 und stellt es dar
+ */
+void printieee(ieee754 in) {
+	
+	printf("\n\n");
+	printf("\t| sign | exponent | mantisse\n");
+	printf("\t|  %c   | %s | %s\n",in.sig, in.exp, in.man);
+	printf("\n\n");
+
+	return;
+} /* printieee */
