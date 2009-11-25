@@ -15,6 +15,7 @@
 #define EXPLEN 8
 #define MANLEN 23
 
+
 /* Typdeklaration
  * 3 Member vom Typ Char. Mehr braucht man fue 0 und 1 nicht.
  *
@@ -34,7 +35,7 @@ void	printieee(ieee754 num);
 
 int main(int argc, char *argv[]) {
 	ieee754 con;
-	float in = -54.0625; /* default value */;
+	float in = -54.0625, con2;
 	
 	if(argc < 2) {
 		fprintf(stderr, "usage: %s <float>\nusing default %f\n\n", argv[0], in);
@@ -48,6 +49,9 @@ int main(int argc, char *argv[]) {
 
 	con = dec2ieee(in);
 	printieee(con);
+	
+	con2 = ieee2dec(con);
+	printf("%f\n", con2);
 
 	return 0;
 } /* main */
@@ -56,8 +60,17 @@ int main(int argc, char *argv[]) {
  * in float um, und gibt diese zurück
  */
 float ieee2dec(ieee754 in) {
-	float out;
-
+	short int i, e, E;
+	float out, mant;
+	
+	for (E=0,i=EXPLEN-1; i >= 0; i--)
+		E += ((in.exp[i] == '1') ? 1 : 0) * 1<<(EXPLEN-1 - i);
+	e = E-B;
+	
+	for (mant = 1, i = 0; i < MANLEN; i++)
+		mant += ((in.man[i] == '1') ? 1 : 0) * 1.0/(2<<(i));
+	
+	out = ((in.sig == '1') ? -1 : 1) * mant * (2<<(e-1));
 
 	return out;
 } /* ieee2dec */
@@ -83,10 +96,9 @@ ieee754 dec2ieee(float  in) {
 
 	/* Exponenten Bits */
 	e = i + B;
-	for(i=EXPLEN-1; i >= 0; i--) {
+	for(i=EXPLEN-1; i >= 0; i--, e /= 2)
 		out.exp[i] = (e%2 == 0) ? '0' : '1';
-		e /= 2;
-	}
+	
 	out.exp[EXPLEN+1] = '\0';
 
 	/* Mantisse */
@@ -103,8 +115,6 @@ ieee754 dec2ieee(float  in) {
 
 		out.man[i] = (set==1) ? '1' : '0';
 
-		printf("m:%f a:%f s:%d\n", mant, tmp, set);
-
 		mant -= tmp * set;
 	}
 	out.man[MANLEN] = '\0';
@@ -116,7 +126,6 @@ ieee754 dec2ieee(float  in) {
  */
 void printieee(ieee754 in) {
 	
-	printf("\n\n");
 	printf("\t| sign | exponent | mantisse\n");
 	printf("\t|  %c   | %s | %s\n",in.sig, in.exp, in.man);
 	printf("\n\n");
