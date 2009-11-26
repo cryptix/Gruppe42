@@ -29,12 +29,12 @@ typedef struct {
 } ieee754;
 
 /* Funktions deklaration */
-float   ieee2dec(ieee754 num);
-ieee754 dec2ieee(float num);
-void	printieee(ieee754 num);
+float ieee2dec(ieee754 *num);
+void  dec2ieee(float in, ieee754 *out);
+void  printieee(ieee754 *num);
 
 int main(int argc, char *argv[]) {
-	ieee754 con;
+	ieee754 *con;
 	float in = -54.0625, con2;
 	
 	if(argc < 2) {
@@ -42,12 +42,17 @@ int main(int argc, char *argv[]) {
 	} else {
 		in = strtof(argv[1], NULL);
 		if(in == 0) {
-			fprintf(stderr, "Conversion failed. See man 2 strtof for the proper way to input numbers.\n");
+			fprintf(stderr, "Error: Conversion failed. See man 2 strtof for the proper way to input numbers.\n");
 			return -1;
 		}
 	}
 
-	con = dec2ieee(in);
+	if( (con = (ieee754 *) malloc(sizeof(ieee754))) == NULL) {
+		fprintf(stderr, "Error: Couldn't allocate memory on heap\n");
+		return -2;
+	}
+
+	dec2ieee(in, con);
 	printieee(con);
 	
 	con2 = ieee2dec(con);
@@ -59,18 +64,19 @@ int main(int argc, char *argv[]) {
 /* Wandelt eine Variable in ieee754 bit Darstellung
  * in float um, und gibt diese zurück
  */
-float ieee2dec(ieee754 in) {
+float ieee2dec(ieee754 *in) {
 	short int i, e, E;
 	float out, mant;
 	
 	for (E=0,i=EXPLEN-1; i >= 0; i--)
-		E += ((in.exp[i] == '1') ? 1 : 0) * 1<<(EXPLEN-1 - i);
+		E += ((in->exp[i] == '1') ? 1 : 0) * 1<<(EXPLEN-1 - i);
 	e = E-B;
 	
 	for (mant = 1, i = 0; i < MANLEN; i++)
-		mant += ((in.man[i] == '1') ? 1 : 0) * 1.0/(2<<(i));
+		mant += ((in->man[i] == '1') ? 1 : 0) * 1.0/(2<<(i));
 	
-	out = ((in.sig == '1') ? -1 : 1) * mant * (2<<(e-1));
+	/* out = s * m * 2^e */
+	out = ((in->sig == '1') ? -1 : 1) * mant * (2<<(e-1));
 
 	return out;
 } /* ieee2dec */
@@ -78,13 +84,12 @@ float ieee2dec(ieee754 in) {
 /* Wandelt eine Variable von Float
  * in ieee754 bit darstellung um
  */
-ieee754 dec2ieee(float  in) {
+void dec2ieee(float  in, ieee754 *out) {
 	short int i, e, set;
-	volatile float mant, exp, tmp;
-	ieee754 out;
+	float mant, exp, tmp;
 
 	/* Vorzeichen Bit */
-	out.sig = (in < 0) ? '1' : '0';
+	out->sig = (in < 0) ? '1' : '0';
 	in *= (in < 0) ? -1 : 1;	
 
 	/* Exponenten Berechnung */
@@ -97,9 +102,9 @@ ieee754 dec2ieee(float  in) {
 	/* Exponenten Bits */
 	e = i + B;
 	for(i=EXPLEN-1; i >= 0; i--, e /= 2)
-		out.exp[i] = (e%2 == 0) ? '0' : '1';
+		out->exp[i] = (e%2 == 0) ? '0' : '1';
 	
-	out.exp[EXPLEN+1] = '\0';
+	out->exp[EXPLEN+1] = '\0';
 
 	/* Mantisse */
 	mant = in/exp;
@@ -113,21 +118,21 @@ ieee754 dec2ieee(float  in) {
 		tmp = 1.0/(2<<(i));
 		set = ( mant > tmp)  ? 1 : 0;
 
-		out.man[i] = (set==1) ? '1' : '0';
+		out->man[i] = (set==1) ? '1' : '0';
 
 		mant -= tmp * set;
 	}
-	out.man[MANLEN] = '\0';
+	out->man[MANLEN] = '\0';
 
-	return out;
+	return;
 } /* dec2ieee */
 
 /* Nimmt ein ieee754 und stellt es dar
  */
-void printieee(ieee754 in) {
+void printieee(ieee754 *in) {
 	
 	printf("\t| sign | exponent | mantisse\n");
-	printf("\t|  %c   | %s | %s\n",in.sig, in.exp, in.man);
+	printf("\t|  %c   | %s | %s\n",in->sig, in->exp, in->man);
 	printf("\n\n");
 
 	return;
