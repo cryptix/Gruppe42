@@ -1,13 +1,9 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-
 void bin2float(float* target, char bits[]);
-
 void intTo32Bit(int* target, int number);
-
 void float2bin(int* target, float number);
-
 int main(int argc, char* argv[]){
 	if(argc==3){
 		int i;
@@ -21,7 +17,7 @@ int main(int argc, char* argv[]){
 		else if(strcmp(argv[1],"b2f")==0){
 			float* target = malloc(4);
 			bin2float(target, argv[2]);
-			printf("%f", *target);
+			printf("%10.179f", *target);
 			free(target);
 		}
 		printf("\n");
@@ -29,7 +25,6 @@ int main(int argc, char* argv[]){
 	}
 	return 1;
 }
-
 void bin2float(float* target, char bits[]){
 	unsigned int* retint = (unsigned int*) target;
 	int i;
@@ -51,8 +46,7 @@ void float2bin(int* target, float number){
 	printf("als Int: %d\n",*intfoo);
 	intTo32Bit(target, *intfoo);
 }
-
 void intTo32Bit(int* target, int number){
-	int i=0;
+	int i;
 	for(i=0; i<32; i++) target[i] = (number & (2<<(30-i))) ?  1:0;
 }
