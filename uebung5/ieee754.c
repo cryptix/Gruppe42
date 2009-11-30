@@ -52,11 +52,15 @@ int main(int argc, char *argv[]) {
 		return -2;
 	}
 
+	printf("\n");
+
 	dec2ieee(in, con);
 	printieee(con);
 	
 	con2 = ieee2dec(con);
-	printf("%f\n", con2);
+	printf("\t%f\n\n", con2);
+
+	free(con);
 
 	return 0;
 } /* main */
@@ -66,7 +70,7 @@ int main(int argc, char *argv[]) {
  */
 float ieee2dec(ieee754 *in) {
 	short int i, e, E;
-	float out, mant;
+	float out, mant, exp;
 	
 	for (E=0,i=EXPLEN-1; i >= 0; i--)
 		E += ((in->exp[i] == '1') ? 1 : 0) * 1<<(EXPLEN-1 - i);
@@ -76,7 +80,8 @@ float ieee2dec(ieee754 *in) {
 		mant += ((in->man[i] == '1') ? 1 : 0) * 1.0/(2<<(i));
 	
 	/* out = s * m * 2^e */
-	out = ((in->sig == '1') ? -1 : 1) * mant * (2<<(e-1));
+	exp = (e >= 0) ? 1 << e : 1.0 / (1 << (e * -1));
+	out = ((in->sig == '1') ? -1 : 1) * mant * exp;
 
 	return out;
 } /* ieee2dec */
@@ -90,14 +95,13 @@ void dec2ieee(float  in, ieee754 *out) {
 
 	/* Vorzeichen Bit */
 	out->sig = (in < 0) ? '1' : '0';
-	in *= (in < 0) ? -1 : 1;	
+	in *= (in < 0) ? -1 : 1;
 
 	/* Exponenten Berechnung */
 	if(in > 1 || in < -1)
-		for(i=0, exp=1; in > exp*2; i++, exp*=2);
+		for(i=0, exp=1; in >= exp*2; i++, exp*=2);
 	else
 		for(i=0, exp=1; in < exp; i--, exp/=2);
-
 
 	/* Exponenten Bits */
 	e = i + B;
@@ -107,7 +111,7 @@ void dec2ieee(float  in, ieee754 *out) {
 	out->exp[EXPLEN+1] = '\0';
 
 	/* Mantisse */
-	mant = in/exp;
+	mant = in / exp;
 
 	/* implizit 1 */
 	mant -= 1;
@@ -115,8 +119,8 @@ void dec2ieee(float  in, ieee754 *out) {
 	/* Mantissen Bits */
 	for(i=0; i <= MANLEN; i++) {
 
-		tmp = 1.0/(2<<(i));
-		set = ( mant > tmp)  ? 1 : 0;
+		tmp = 1.0 / (2 << i);
+		set = ( mant >= tmp)  ? 1 : 0;
 
 		out->man[i] = (set==1) ? '1' : '0';
 
@@ -133,7 +137,7 @@ void printieee(ieee754 *in) {
 	
 	printf("\t| sign | exponent | mantisse\n");
 	printf("\t|  %c   | %s | %s\n",in->sig, in->exp, in->man);
-	printf("\n\n");
+	printf("\n");
 
 	return;
 } /* printieee */
