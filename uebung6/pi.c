@@ -1,3 +1,5 @@
+/* gcc *.c -o pi && ./pi */
+
 #include "pi.h"
 
 
@@ -14,8 +16,11 @@ void usage(void){
 
 int main(void) {
 	int mopt; /* menu option */
+	int picnt = 42; /* number of digits do calculate */
+	int found = 0;
 	char *pi, *in;
 	
+	/* wird noch dynamisch */
 	if((pi = (char *) malloc(sizeof(char) * NMAX)) == NULL) {
 		fprintf(stderr, "Error: Couldn't allocate memory for π.\n");
 		exit(-1);
@@ -25,27 +30,45 @@ int main(void) {
 		exit(-2);
 	}
 	
+	strcpy(pi,"3.141");	
+	
+	usage();
+	
 	while(mopt = getopt(in)) {
 		switch(mopt) {
 			case DIGCNT:
-				/* check in first */
-				printf("digcnt: %s\n",in);
+				if(picnt = atoi(in)) {
+					printf("digcnt: %d\n",picnt);
+				} else {
+					printf("invalid input\n");
+				}
 				break;
 			case CALC:
-				printf("calculating new pi\n");
+				if(calcpi(pi, picnt) == 0) {
+					printf("calculated pi to the %dth decimal point\n", picnt);
+				} else {
+					printf("something went worng (?)\n");
+				}
 				break;
 			case PRINT:
-				printf("printing pi\n");
+				printf("printing pi: %s\n", pi);
 				break;
 			case SEARCH:
 				/* check in first */
 			 	printf("search digits: %s\n", in);
+				if((found = searchpi(pi, atoi(in))) == -1) {
+					printf("couldnt find pi in the first %d digits\n", picnt);
+				} else {
+					printf("found pi at %d\n", picnt);
+				}
 				break;
 			case DIST:
 				printf("calc distribution\n");
+				calcdist(pi);
 				break;
 			case AVG:
 				printf("calc average\n");
+				calcavg(pi);
 				break;
 			case HELP:
 				usage();
