@@ -1,3 +1,5 @@
+#include "pi.h"
+
 int searchpi(char *pi, int num) {
 	/* bogus */
 	if(pi[0] == num) {
