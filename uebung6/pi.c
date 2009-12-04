@@ -17,8 +17,9 @@ int main(void) {
 	int mopt; /* menu option */
 	int picnt = 42; /* number of digits do calculate */
 	int found = 0;
+	int i;
 	float avg = 0;
-	int dist[10];
+	int dist[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	char *pi, *in;
 	
 	/* wird noch dynamisch */
@@ -31,7 +32,7 @@ int main(void) {
 		exit(-2);
 	}
 	
-	strcpy(pi,"3.141");	
+	strcpy(pi,"14159265");	
 	
 	usage();
 	
@@ -52,7 +53,7 @@ int main(void) {
 				}
 				break;
 			case PRINT:
-				printf("printing pi: %s\n", pi);
+				printf("printing pi: 3.%s\n", pi);
 				break;
 			case SEARCH:
 				/* check in first */
@@ -64,8 +65,13 @@ int main(void) {
 				}
 				break;
 			case DIST:
-				printf("calc distribution\n");
+				printf("Ziffernverteilung:\n");
+				
 				calcdist(pi, dist);
+				
+				for(i = 0; i < 10; ++i)
+					printf("%d:%d\n", i, dist[i]);
+					
 				break;
 			case AVG:
 				avg = calcavg(pi);
