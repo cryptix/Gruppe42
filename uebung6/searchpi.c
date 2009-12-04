@@ -1,8 +1,8 @@
 #include "pi.h"
 
-int searchpi(char *pi, int num) {
+int searchpi(char *pi, char *num) {
 	/* bogus */
-	if(pi[0] == num) {
+	if(strcmp(pi, num) == 0) {
 		return 42;
 	}
 	

@@ -17,6 +17,8 @@ int main(void) {
 	int mopt; /* menu option */
 	int picnt = 42; /* number of digits do calculate */
 	int found = 0;
+	float avg = 0;
+	int dist[10];
 	char *pi, *in;
 	
 	/* wird noch dynamisch */
@@ -55,19 +57,19 @@ int main(void) {
 			case SEARCH:
 				/* check in first */
 			 	printf("search digits: %s\n", in);
-				if((found = searchpi(pi, atoi(in))) == -1) {
+				if((found = searchpi(pi, in)) == -1) {
 					printf("couldnt find pi in the first %d digits\n", picnt);
 				} else {
-					printf("found pi at %d\n", picnt);
+					printf("found pi at %d\n", found);
 				}
 				break;
 			case DIST:
 				printf("calc distribution\n");
-				calcdist(pi);
+				calcdist(pi, dist);
 				break;
 			case AVG:
-				printf("calc average\n");
-				calcavg(pi);
+				avg = calcavg(pi);
+				printf("avg of pi: %f\n", avg);
 				break;
 			case HELP:
 				usage();
