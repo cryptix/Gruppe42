@@ -19,7 +19,6 @@ int* calcdist(void);
 
 /* menu handling */
 int getopt(char *);
-int getch(void);
-void ungetch(int);
+
 
 

@@ -1,5 +1,12 @@
 #include "pi.h"
 
+#define BUFSIZE 100
+static char buf[BUFSIZE];	/* buffer for ungetch */
+static int bufp = 0;		/* next free position in buf */
+
+static int getch(void);
+static void ungetch(int);
+
 int getopt(char *s) {
 	int i, c, next;
 	int opt;
@@ -30,4 +37,17 @@ int getopt(char *s) {
 		return opt; /* all other options dont have input */
 	
 	return UNKWN;
+}
+
+/* get a (possibly pushed-back) character */
+static int getch(void) {
+	return (bufp > 0) ? buf[--bufp] : getchar();
+}
+
+/* push character back on input */
+static void ungetch(int c) {
+	if(bufp >= BUFSIZE)
+		fprintf(stderr, "ungetch: too many characters\n");
+	else
+		buf[bufp++] = c;
 }

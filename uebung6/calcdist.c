@@ -2,8 +2,7 @@
 
 int* calcdist(void) {
 	int *dist;
-	char *ptr = pi;
-	
+	char *ptr = pi; /* changing pi, means changing pi in the global context */
 	
 	if((dist = (int *) malloc(sizeof(int) * 10)) == NULL) {
 		fprintf(stderr, "Error: Couldn't allocate memory for π.\n");
