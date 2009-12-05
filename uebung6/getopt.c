@@ -13,6 +13,8 @@ int getopt(char *s) {
 	while((s[0] = c = getch()) == ' ' || c == '\t'); /* skip whitespaces */
 	s[1]='\0'; /* just in case */
 
+	if(c == EOF) return EOF;
+
 	opt = s[0] - '0';
 
 	/* no menu point */

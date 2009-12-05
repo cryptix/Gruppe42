@@ -38,7 +38,7 @@ int main(void) {
 	
 	usage();
 	
-	while(mopt = getopt(in)) {
+	while((mopt = getopt(in)) != EOF) {
 		switch(mopt) {
 			case DIGCNT:
 				if(piLen = atoi(in)) {
@@ -91,3 +91,4 @@ int main(void) {
 	
 	return 0;
 }
+
