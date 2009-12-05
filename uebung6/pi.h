@@ -14,7 +14,7 @@ extern int piLen;
 int calcpi(void);
 int searchpi(char *num);
 float calcavg(void);
-int calcdist(int dist[]);
+int* calcdist(void);
 
 
 /* menu handling */

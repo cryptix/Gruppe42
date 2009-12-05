@@ -20,7 +20,7 @@ int main(void) {
 	int mopt; /* menu option */
 	int found = 0;
 	int i;
-	int dist[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+	int *dist;
 	char *in;
 	
 	/* wird noch dynamisch */
@@ -32,7 +32,7 @@ int main(void) {
 		fprintf(stderr, "Error: Couldn't allocate memory for π.\n");
 		exit(-1);
 	}
-	strcpy(pi,"14159265");	
+	strcpy(pi,"14159265358979323846264338327950288419716939937510");	
 	piLen = strlen(pi);
 	
 	
@@ -65,9 +65,14 @@ int main(void) {
 				}	
 				break;
 			case DIST:
-				calcdist(dist);
-				printf("Ziffernverteilung:\n");
-				for(i = 0; i < 10; ++i) printf("%d\t%d\n", i, dist[i]);
+				dist = calcdist();
+				if(dist != NULL) {
+					printf("Ziffernverteilung:\n");
+					for(i = 0; i < 10; ++i) printf("%d\t%d\n", i, dist[i]);
+					free(dist);
+				} else {
+					printf("something went wrong\n");
+				}
 				break;
 			case AVG:
 				printf("Durchschnitt der ersten %d Stellen: %f\n", piLen, calcavg());
