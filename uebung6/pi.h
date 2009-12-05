@@ -7,11 +7,14 @@
 
 enum { DIGCNT=1, CALC, PRINT, SEARCH, DIST, AVG, HELP, QUIT, UNKWN};
 
+extern char *pi;
+extern int piLen;
+
 /* working functions */
-int calcpi(char *pi, int n);
-int searchpi(char *pi, char *num);
-float calcavg(char *pi);
-int calcdist(char *pi, int dist[]);
+int calcpi(void);
+int searchpi(char *num);
+float calcavg(void);
+int calcdist(int dist[]);
 
 
 /* menu handling */

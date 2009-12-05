@@ -1,6 +1,5 @@
 #include "pi.h"
 
-
 int getopt(char *s) {
 	int i, c, next;
 	int opt;

@@ -13,14 +13,15 @@ void usage(void){
 	printf("(8) Programm beenden\n");
 }
 
+char *pi;
+int piLen = 42; 
+
 int main(void) {
 	int mopt; /* menu option */
-	int picnt = 42; /* number of digits do calculate */
 	int found = 0;
 	int i;
-	float avg = 0;
 	int dist[] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-	char *pi, *in;
+	char *in;
 	
 	/* wird noch dynamisch */
 	if((pi = (char *) malloc(sizeof(char) * NMAX)) == NULL) {
@@ -28,54 +29,48 @@ int main(void) {
 		exit(-1);
 	}
 	if((in = (char *) malloc(sizeof(char) * INMAX)) == NULL) {
-		fprintf(stderr, "Error: Couldn't allocate memory for user input.\n");
-		exit(-2);
+		fprintf(stderr, "Error: Couldn't allocate memory for π.\n");
+		exit(-1);
 	}
-	
 	strcpy(pi,"14159265");	
+	piLen = strlen(pi);
+	
 	
 	usage();
 	
 	while(mopt = getopt(in)) {
 		switch(mopt) {
 			case DIGCNT:
-				if(picnt = atoi(in)) {
-					printf("digcnt: %d\n",picnt);
+				if(piLen = atoi(in)) {
+					printf("digcnt: %d\n",piLen);
 				} else {
 					printf("invalid input\n");
-				}
+				}	
 				break;
 			case CALC:
-				if(calcpi(pi, picnt) == 0) {
-					printf("calculated pi to the %dth decimal point\n", picnt);
+				if(calcpi() == 0) {
+					printf("calculated pi to the %dth decimal point\n", piLen);
 				} else {
-					printf("something went worng (?)\n");
+					printf("some thing went worng (?)\n");
 				}
 				break;
 			case PRINT:
-				printf("printing pi: 3.%s\n", pi);
+				printf("π ≈ 3.%s\n", pi);
 				break;
 			case SEARCH:
-				/* check in first */
-			 	printf("search digits: %s\n", in);
-				if((found = searchpi(pi, in)) == -1) {
-					printf("couldnt find pi in the first %d digits\n", picnt);
+				if((found = searchpi(in)) == -1) {
+					printf("Konnte '%s' in den ersten %d Stellen von PI nicht finden\n", in, piLen);
 				} else {
-					printf("found pi at %d\n", found);
-				}
+					printf("Konnte '%s' an der  %den Stelle finden\n", in, found);
+				}	
 				break;
 			case DIST:
+				calcdist(dist);
 				printf("Ziffernverteilung:\n");
-				
-				calcdist(pi, dist);
-				
-				for(i = 0; i < 10; ++i)
-					printf("%d:%d\n", i, dist[i]);
-					
+				for(i = 0; i < 10; ++i) printf("%d\t%d\n", i, dist[i]);
 				break;
 			case AVG:
-				avg = calcavg(pi);
-				printf("avg of pi: %f\n", avg);
+				printf("Durchschnitt der ersten %d Stellen: %f\n", piLen, calcavg());
 				break;
 			case HELP:
 				usage();
@@ -83,7 +78,7 @@ int main(void) {
 			case QUIT:
 				exit(0);
 				break;
-			}
+		}
 	}
 	
 	free(pi);
