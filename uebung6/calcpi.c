@@ -11,7 +11,7 @@ int calcpi(void) {
 		return -1;
 	}
 
-	rowLen = 10 * pilen / 3 +1; 
+	rowLen = 10 * piLen / 3 +1; 
 	if( (piRow = (long int *) malloc(sizeof(long int) * rowLen)) == NULL) {
 		return -1;
 	}
