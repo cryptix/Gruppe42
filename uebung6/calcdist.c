@@ -10,7 +10,6 @@ int* calcdist(void) {
 	}
 	bzero(dist, sizeof(int)*10);
 	
-	dist[3] = 1; /* we dont store 3. in pi */	
 	for(; *ptr; ptr++) dist[(*ptr)-'0']++;
 	
 	return dist;
