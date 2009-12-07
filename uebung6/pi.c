@@ -23,7 +23,7 @@ int main(void) {
 	char *in;
 	
 	if((in = (char *) malloc(sizeof(char) * INMAX)) == NULL) {
-		fprintf(stderr, "Fehler w�hrend Speicherallozierung.\n");
+		fprintf(stderr, "Fehler während Speicherallozierung.\n");
 		exit(-1);
 	}
 	calcpi();	
@@ -35,7 +35,7 @@ int main(void) {
 			case DIGCNT:
 				if((newPiLen = atoi(in)) != 0) {
 					piLen = newPiLen;	
-					printf("Neue Laenge fuer PI: %d\n",piLen);
+					printf("Neue Länge für PI: %d\n",piLen);
 				} else {
 					printf("Input ist keine Zahl\n");
 				}	
