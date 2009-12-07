@@ -1,7 +1,6 @@
 /* gcc *.c -o pi && ./pi */
 #include "pi.h"
 
-
 void usage(void){
 	printf("(1) Anzahl der Stellen eingeben\n");
 	printf("(2) PI-Stellen (neu) erzeugen\n");
@@ -14,13 +13,15 @@ void usage(void){
 }
 
 char *pi;
-int piLen = 42; 
+unsigned long piLen = PILENDEF; 
 
 int main(void) {
 	int mopt; /* menu option */
-	int newPiLen, i, found = 0;
-	int *dist;
+	unsigned short i;
+	unsigned int *dist;
+	unsigned long newPiLen, found=0;
 	char *in;
+	time_t delta;
 	
 	if((in = (char *) malloc(sizeof(char) * INMAX)) == NULL) {
 		fprintf(stderr, "Fehler während Speicherallozierung.\n");
@@ -33,17 +34,23 @@ int main(void) {
 	while((mopt = getopt(in)) != EOF) {
 		switch(mopt) {
 			case DIGCNT:
-				if((newPiLen = atoi(in)) != 0) {
-					piLen = newPiLen;	
-					printf("Neue Länge für PI: %d\n",piLen);
+				errno = 0;
+				newPiLen = strtoul(in, NULL, 10);
+				if( (errno == ERANGE && newPiLen == ULONG_MAX) || (errno != 0 && newPiLen == 0) ) {
+					perror("strtoul");
+					piLen = PILENDEF;
+					printf("Input ist keine Zahl. Benutze %lu\n", piLen);
 				} else {
-					printf("Input ist keine Zahl\n");
+					piLen = newPiLen;
+					printf("Neue Laenge fuer PI: %lu\n", piLen);
 				}	
 				break;
 			case CALC:
+				delta = time(NULL);
 				switch(calcpi()) {
 					case 0:
-						printf("Pi auf %d Stellen bestimmt\n", piLen);
+						delta = time(NULL)-delta;
+						printf("Pi auf %lu Stellen zu bestimmen hat %lu Sekunden gedauert.\n", piLen, (unsigned long) delta);
 						break;
 					case -1:
 						fprintf(stderr, "Fehler waehrend Speicherallozierung\n");
@@ -55,9 +62,9 @@ int main(void) {
 				break;
 			case SEARCH:
 				if((found = searchpi(in)) == -1) {
-					printf("Konnte '%s' in den ersten %d Stellen von PI nicht finden\n", in, piLen);
+					printf("Konnte '%s' in den ersten %lu Stellen von PI nicht finden\n", in, piLen);
 				} else {
-					printf("Konnte '%s' an der  %den Stelle finden\n", in, found);
+					printf("Konnte '%s' an der  %luen Stelle finden\n", in, found);
 				}	
 				break;
 			case DIST:
@@ -71,7 +78,7 @@ int main(void) {
 				}
 				break;
 			case AVG:
-				printf("Durchschnitt der ersten %d Stellen: %f\n", piLen, calcavg());
+				printf("Durchschnitt der ersten %lu Stellen: %f\n", piLen, calcavg());
 				break;
 			case HELP:
 				usage();

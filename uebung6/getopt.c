@@ -28,7 +28,7 @@ int getopt(char *s) {
 
 			i=0;
 			if(isdigit(c))
-				while(isdigit(s[i++] = getch()));
+				while(isdigit(s[i++] = getch()) && i < INMAX);
 			s[(i!=0) ? i-1 : 0] = '\0'; /* replace newline */
 		default:
 			return opt;
