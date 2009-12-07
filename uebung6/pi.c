@@ -18,33 +18,26 @@ int piLen = 42;
 
 int main(void) {
 	int mopt; /* menu option */
-	int found = 0;
-	int i;
+	int newPiLen, i, found = 0;
 	int *dist;
 	char *in;
 	
-	/* wird noch dynamisch */
-	if((pi = (char *) malloc(sizeof(char) * NMAX)) == NULL) {
-		fprintf(stderr, "Error: Couldn't allocate memory for π.\n");
-		exit(-1);
-	}
 	if((in = (char *) malloc(sizeof(char) * INMAX)) == NULL) {
 		fprintf(stderr, "Error: Couldn't allocate memory for π.\n");
 		exit(-1);
 	}
-	strcpy(pi,"14159265358979323846264338327950288419716939937510");	
-	piLen = strlen(pi);
-	
+	calcpi();	
 	
 	usage();
 	
 	while((mopt = getopt(in)) != EOF) {
 		switch(mopt) {
 			case DIGCNT:
-				if(piLen = atoi(in)) {
-					printf("digcnt: %d\n",piLen);
+				if((newPiLen = atoi(in)) != 0) {
+					piLen = newPiLen;	
+					printf("Neue L�nge f�r PI: %d\n",piLen);
 				} else {
-					printf("invalid input\n");
+					printf("'%s' ist keine Zahl\n", in);
 				}	
 				break;
 			case CALC:
@@ -55,7 +48,7 @@ int main(void) {
 				}
 				break;
 			case PRINT:
-				printf("π ≈ 3.%s\n", pi);
+				printf("pi = %c.%s\n", pi[0], &pi[1]);
 				break;
 			case SEARCH:
 				if((found = searchpi(in)) == -1) {
