@@ -1,6 +1,6 @@
 /* gcc *.c -o pi && ./pi */
 #include "pi.h"
-
+#include <time.h>
 
 void usage(void){
 	printf("(1) Anzahl der Stellen eingeben\n");
@@ -21,6 +21,7 @@ int main(void) {
 	int newPiLen, i, found = 0;
 	int *dist;
 	char *in;
+	time_t delta;
 	
 	if((in = (char *) malloc(sizeof(char) * INMAX)) == NULL) {
 		fprintf(stderr, "Fehler während Speicherallozierung.\n");
@@ -41,9 +42,11 @@ int main(void) {
 				}	
 				break;
 			case CALC:
+				delta = time(NULL);
 				switch(calcpi()) {
 					case 0:
-						printf("Pi auf %d Stellen bestimmt\n", piLen);
+						delta = time(NULL)-delta;
+						printf("Pi auf %d Stellen zu bestimmt hat %lu Sekunden gedauert.\n", piLen, (unsigned long) delta);
 						break;
 					case -1:
 						fprintf(stderr, "Fehler waehrend Speicherallozierung\n");
