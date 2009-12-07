@@ -9,7 +9,7 @@ int calcpi(void) {
 	
 	/* Arraylängen festlegen */
 	free(pi);
-	if( (pi = (char *) malloc(sizeof(char) * piLen)) == NULL) {
+	if( (pi = (char *) malloc(sizeof(char) * (piLen + 1))) == NULL) {
 		return -1;
 	}
 
@@ -46,6 +46,8 @@ int calcpi(void) {
 			j--;
 		}
 	}
+
+	pi[piLen] = '\0';
 
 	free(piRow);
 
