@@ -36,12 +36,12 @@ int calcpi(void) {
 			piRow[j] %= a;
 		}
 
-		pi[i] = piRow[0] / 10 + 48; /* Dezimalstelle aus höchstwertigstem Reihenglied berechnen (und Umformung in ASCII-Wert) */
+		pi[i] = piRow[0] / 10 + '0'; /* Dezimalstelle aus höchstwertigstem Reihenglied berechnen (und Umformung in ASCII-Wert) */
 		piRow[0] %= 10; /* Berechnete Dezimalstelle von der Reihe subtrahieren */
 
 		j = i; /* Mögliche unaufgelöste Überträge auflösen */
-		while (pi[j] == 58) {
-			pi[j] = 48;
+		while (pi[j] == '9' + 1) {
+			pi[j] = '0';
 			pi[j-1] += 1;
 			j--;
 		}
