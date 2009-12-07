@@ -1,14 +1,14 @@
 #include "pi.h"
 
-int* calcdist(void) {
-	int *dist;
+unsigned int* calcdist(void) {
+	unsigned int *dist;
 	char *ptr = pi; /* changing pi, means changing pi in the global context */
 	
-	if((dist = (int *) malloc(sizeof(int) * 10)) == NULL) {
+	if((dist = (unsigned int *) malloc(sizeof(unsigned int) * 10)) == NULL) {
 		fprintf(stderr, "Error: Couldn't allocate memory for π.\n");
 		return NULL;
 	}
-	bzero(dist, sizeof(int)*10);
+	bzero(dist, sizeof(unsigned int)*10);
 	
 	for(; *ptr; ptr++) dist[(*ptr)-'0']++;
 	

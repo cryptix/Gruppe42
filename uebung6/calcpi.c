@@ -2,9 +2,9 @@
 
 /* calc pi to n decimal points */
 int calcpi(void) {
-	int i, j;
-	int *piRow; /* Reihenglieder */
-	int rowLen, almostRowLen; /* Anzahl Reihenglieder */
+	unsigned long i, j;
+	unsigned long rowLen, almostRowLen; /* Anzahl Reihenglieder */
+	unsigned long *piRow; /* Reihenglieder */
 	int a;
 	
 	/* Arraylängen festlegen */
@@ -14,7 +14,7 @@ int calcpi(void) {
 	}
 
 	rowLen = 10 * piLen / 3 + 1;
-	if( (piRow = (int *) malloc(sizeof(int) * rowLen)) == NULL) {
+	if( (piRow = (unsigned long *) malloc(sizeof(unsigned long) * rowLen)) == NULL) {
 		return -1;
 	}
 
