@@ -4,8 +4,8 @@
 typedef struct{
 	int row;	/* zeilen */
 	int col;	/* spalten */
-	int det;	/* detrminante */
-	int **wert; /* daten */
+	double det;	/* detrminante */
+	double *wert; /* daten */
 } matrix;
 
 enum { ORDER=1, INA, DETA, INVA, SOLVE, HELP, QUIT, UNKWN};
