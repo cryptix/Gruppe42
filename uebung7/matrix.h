@@ -1,14 +1,11 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 typedef struct{
-	int ordnung
-	int *wert;
-} vector;
-
-typedef struct{
-	int ordnung
-	int **wert;
+	int row;	/* zeilen */
+	int col;	/* spalten */
+	int det;	/* detrminante */
+	int **wert; /* daten */
 } matrix;
 
 enum { ORDER=1, INA, DETA, INVA, SOLVE, HELP, QUIT, UNKWN};
@@ -19,5 +16,5 @@ int invert(matrix *matr, matrix *inv); /* matrix.c - henry */
 int solve(matrix *matr); /* lgs.c - jan */
 int wertegeben(matrix *matr); /* io.c - jannik*/
 
-int getopt(char *); /* getopt.c - henry */
+int getopt(matrix *); /* getopt.c - henry */
 
