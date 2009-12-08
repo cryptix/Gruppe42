@@ -19,4 +19,5 @@ int wertegeben(matrix *matr); /* io.c - jannik*/
 int getopt(matrix *); /* getopt.c - henry */
 
 /* tools.c */
-void printfMat(matrix *matr);
+matrix *allocMat(unsigned int row, unsigned int col);
+void printMat(matrix *matr);
