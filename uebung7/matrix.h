@@ -2,8 +2,8 @@
 #include <stdlib.h>
 
 typedef struct{
-	int row;	/* zeilen */
-	int col;	/* spalten */
+	unsigned int row;	/* zeilen */
+	unsigned int col;	/* spalten */
 	double det;	/* detrminante */
 	double *wert; /* daten */
 } matrix;
@@ -18,3 +18,5 @@ int wertegeben(matrix *matr); /* io.c - jannik*/
 
 int getopt(matrix *); /* getopt.c - henry */
 
+/* tools.c */
+void printfMat(matrix *matr);
