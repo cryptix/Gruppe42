@@ -30,3 +30,18 @@ int getSubDet(matrix *matr, int reihe, int spalte, subDet* ret){
 
 	return 0;
 }
+
+/* Einheitsmatrix erstellen */
+matrix *ident(unsigned int order) {
+	unsigned int i;
+	matrix *ptr;
+
+	ptr=allocMat(order, order);
+	if(ptr == NULL) return NULL;
+
+	for(i = 0; i < order; i++)
+		ptr->wert[order * i + i] = 1.0;
+
+	return ptr;
+}
+
