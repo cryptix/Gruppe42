@@ -18,14 +18,14 @@ matrix *allocMat(unsigned int row, unsigned int col) {
 
 	mat = (matrix *) malloc(sizeof(matrix));
 	if(mat == NULL) {
-		fprintf(stderr, "Error 1: Couldn't Allocate Matrix\n");
+		fprintf(stderr, "Error 1: Couldn't allocate memory for matrix.\n");
 		return NULL;
 	}
 
 	mat->wert = (double *) malloc(sizeof(double) * row * col);
 	if(mat->wert == NULL) {
 		free(mat); /* free struct space */
-		fprintf(stderr, "Couldnt Alloc\n");
+		fprintf(stderr, "Error 2: Couldn't allocate memory for values.\n");
 		return NULL;
 	}
 
