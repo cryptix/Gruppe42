@@ -9,7 +9,7 @@ int getSubDet(matrix *matr, int reihe, int spalte, subDet* ret);
 
 int determ(matrix *matr){
 	matrix* foo = allocMat(3,3);
-	foo->werte={1,2,3,4,5,6,7,8,10};
+	//foo->werte={1,2,3,4,5,6,7,8,10};
 	matrix* subdet = allocMat(2,2);
 }
 
@@ -32,7 +32,7 @@ int getSubDet(matrix *matr, int reihe, int spalte, subDet* ret){
 }
 
 /* Einheitsmatrix erstellen */
-matrix *ident(unsigned int order) {
+matrix *identMat(unsigned int order) {
 	unsigned int i;
 	matrix *ptr;
 

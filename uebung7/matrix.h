@@ -16,7 +16,7 @@ int invert(matrix *matr, matrix *inv); /* matrix.c - henry */
 int solve(matrix *matr); /* lgs.c - jan */
 int wertegeben(matrix *matr); /* io.c - jannik*/
 
-matrix *ident(unsigned int order);
+matrix *identMat(unsigned int order);
 
 int getopt(matrix *); /* getopt.c - henry */
 
