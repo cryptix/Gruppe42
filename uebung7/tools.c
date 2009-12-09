@@ -34,3 +34,9 @@ matrix *allocMat(unsigned int row, unsigned int col) {
 
 	return mat;
 }
+
+void freeMat(matrix *ptr) {
+	free(ptr->wert);
+	ptr->wert=0;
+	free(ptr);
+}

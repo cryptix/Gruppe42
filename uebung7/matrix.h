@@ -20,4 +20,5 @@ int getopt(matrix *); /* getopt.c - henry */
 
 /* tools.c */
 matrix *allocMat(unsigned int row, unsigned int col);
+void freeMat(matrix *matr);
 void printMat(matrix *matr);
