@@ -30,6 +30,8 @@ double getSubDet(double *vals, int order) {
 		subDet += ((i % 2 == 0) ? 1 : -1) * vals[i] * getSubDet(subVals, subOrder);
 	}
 
+	free(subVals);
+
 	return subDet;
 }
 
