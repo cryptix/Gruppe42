@@ -37,6 +37,7 @@ matrix *allocMat(unsigned int row, unsigned int col) {
 
 void freeMat(matrix *ptr) {
 	free(ptr->wert);
-	ptr->wert=0;
+	ptr->wert = NULL;
 	free(ptr);
+	ptr = NULL;
 }

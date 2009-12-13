@@ -4,7 +4,7 @@
 typedef struct{
 	unsigned int row;	/* zeilen */
 	unsigned int col;	/* spalten */
-	double det;	/* detrminante */
+	double det;	/* determinante */
 	double *wert; /* daten */
 } matrix;
 
