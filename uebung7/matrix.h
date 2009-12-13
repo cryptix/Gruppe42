@@ -12,6 +12,7 @@ typedef struct{
 enum { ORDER=1, INA, DETA, INVA, SOLVE, HELP, QUIT, UNKWN};
 
 int determ(matrix *matr); /* matrix.c - jan */
+double getDet(matrix*); /* matrix.c */
 int invert(matrix *matr, matrix *inv); /* matrix.c - henry */
 int solve(matrix *matr); /* lgs.c - jan */
 

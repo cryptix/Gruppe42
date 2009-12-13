@@ -29,7 +29,7 @@ int main(void) {
 				printMat(mat);
 				break;
 			case DETA:
-				printf("det(A):\n");
+				printf("det(A): %f\n", getDet(mat));
 				break;
 			case INVA:
 				printf("A inverted:\n");	

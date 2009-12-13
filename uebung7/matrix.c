@@ -1,34 +1,36 @@
 #include "matrix.h"
 
-typedef struct{
-	int koeff;
-	matrix matr;
-} subDet;
+double getSubDet(double*, int);
 
-int getSubDet(matrix *matr, int reihe, int spalte, subDet* ret);
-
-int determ(matrix *matr){
-	matrix* foo = allocMat(3,3);
-	//foo->werte={1,2,3,4,5,6,7,8,10};
-	matrix* subdet = allocMat(2,2);
+double getDet(matrix *mat) {
+	return getSubDet(mat->wert, mat->col);
 }
 
-int getSubDet(matrix *matr, int reihe, int spalte, subDet* ret){
-	int i,I,j,J;
+double getSubDet(double *vals, int order) {
+	int subOrder = order - 1;
+	double *subVals;
+	double subDet = 0;
+	int i, j, off;
 
-	if(matr->col != matr->row) return -1;
-	if(ret->matr.col != ret->matr.row) return -2;
-	if(matr->col != ret->matr.row) return -3;
+	if (order == 1) return *vals;
 
-	for(i=I=1; i<=matr->row; i++){
-		if(i==reihe) continue; 
-		for(j=J=1; j<=matr->col;j++){
-			if(j==spalte) continue;
-			ret->matr.wert[I*ret->matr.col + J] = matr->wert[i*matr->col + j];
-		}
+	if ((subVals = (double *) malloc(sizeof(double) * subOrder * subOrder)) == NULL) {
+		fprintf(stderr, "Couldn't allocate memory.\n");
 	}
 
-	return 0;
+	for (i = 0; i < order; i++) {
+		off = 0;
+		for (j = 0; j < order * subOrder; j++) {
+			if ((j - i) % order != 0) {
+				subVals[j - off] = vals[order + j];
+			} else {
+				off++;
+			}
+		}
+		subDet += ((i % 2 == 0) ? 1 : -1) * vals[i] * getSubDet(subVals, subOrder);
+	}
+
+	return subDet;
 }
 
 /* Einheitsmatrix erstellen */

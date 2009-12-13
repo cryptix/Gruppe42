@@ -68,7 +68,7 @@ int setValues(matrix *mat) {
 	for (i = 0; i < (int)(mat->row * mat->col); i++) {
 		if (!getNextParam(param)) return 0;
 
-		if ((value = atof(param)) < 1) return 0;
+		value = atof(param);
 
 		mat->wert[i] = value;
 	}
@@ -84,7 +84,7 @@ int setBValues(matrix *mat) {
 	for (i = 0; i < (int)(mat->col); i++) {
 		if (!getNextParam(param)) return 0;
 
-		if ((value = atof(param)) < 1) return 0;
+		value = atof(param);
 
 		mat->vec[i] = value;
 	}
