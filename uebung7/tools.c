@@ -29,6 +29,13 @@ matrix *allocMat(unsigned int row, unsigned int col) {
 		return NULL;
 	}
 
+	mat->vec = (double *) malloc(sizeof(double) * col);
+	if(mat->vec == NULL) {
+		free(mat); /* free struct space */
+		fprintf(stderr, "Error 2: Couldn't allocate memory for values.\n");
+		return NULL;
+	}
+
 	mat->row = row;
 	mat->col = col;
 

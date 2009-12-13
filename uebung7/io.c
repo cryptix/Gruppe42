@@ -5,6 +5,7 @@
 int getNextParam(char*);
 int setOrder(matrix*);
 int setValues(matrix*);
+int setBValues(matrix*);
 
 int getopt(matrix *mat) {
 	char opt;
@@ -23,6 +24,7 @@ int getopt(matrix *mat) {
 			if (!setValues(mat)) return UNKWN;
 			break;
 		case 5:
+			if (!setBValues(mat)) return UNKWN;
 			break;
 	}
 
@@ -69,6 +71,22 @@ int setValues(matrix *mat) {
 		if ((value = atof(param)) < 1) return 0;
 
 		mat->wert[i] = value;
+	}
+
+	return 1;
+}
+
+int setBValues(matrix *mat) {
+	int i;
+	char param[BUFSIZE + 1];
+	double value;
+
+	for (i = 0; i < (int)(mat->col); i++) {
+		if (!getNextParam(param)) return 0;
+
+		if ((value = atof(param)) < 1) return 0;
+
+		mat->vec[i] = value;
 	}
 
 	return 1;
