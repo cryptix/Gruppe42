@@ -8,3 +8,7 @@ a.out
 #ignore editor leftovers
 *~
 *.sw[op]
+
+#Mac OSX
+.DS_Store
+*.dSYM/
