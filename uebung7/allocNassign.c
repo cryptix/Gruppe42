@@ -8,19 +8,19 @@
  *
  * koennen wir auch
  * [][][][][][][][][]
- * allozieren, unt mit [mat.row * curRow + curCol] drauf zugreifen
+ * allozieren, und mit [mat.row * curRow + curCol] drauf zugreifen
  */
 
 int main(void) {
 	matrix *mat;
 	int i, j;
 
-	mat = allocMat(12,12);
+	mat = allocMat(10,25);
 	if(mat == NULL) return -1;
 
-	for(i=0; i < mat->col; i++) {
-		for(j=0; j < mat->row; j++) {
-			mat->wert[mat->row * i + j] = i*j+j;
+	for(i=0; i < mat->row; i++) {
+		for(j=0; j < mat->col; j++) {
+			mat->wert[mat->row * j + i] = i*j+j;
 		}
 	}
 
