@@ -19,6 +19,7 @@ static double getSubDet(double *vals, int order) {
 
 	if ((subVals = (double *) malloc(sizeof(double) * subOrder * subOrder)) == NULL) {
 		fprintf(stderr, "Couldn't allocate memory.\n");
+		return 0;
 	}
 
 	for (i = 0; i < order; i++) {
@@ -30,7 +31,7 @@ static double getSubDet(double *vals, int order) {
 				off++;
 			}
 		}
-		subDet += ((i % 2 == 0) ? 1 : -1) * vals[i] * getSubDet(subVals, subOrder);
+		subDet += ((i % 2 == 0) ? 1 : -1) * ((vals[i] == 0) ? 0 : vals[i] * getSubDet(subVals, subOrder));
 	}
 
 	free(subVals);
