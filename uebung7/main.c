@@ -40,7 +40,8 @@ int main(void) {
 				}
 				break;
 			case SOLVE:
-				printf("for Ax=b, x=%s\n", "");
+				solve(mat);
+				printVector(mat);
 				break;
 			case HELP:
 				usage();

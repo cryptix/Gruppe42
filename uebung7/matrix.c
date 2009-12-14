@@ -4,7 +4,9 @@ static double  getSubDet(double*, int);
 static matrix* getSubMat(matrix*, unsigned int, unsigned int);
 
 double getDet(matrix *mat) {
-	return getSubDet(mat->wert, mat->col);
+	double foo = getSubDet(mat->wert, mat->col);
+	mat->det = foo;
+	return foo;
 }
 
 static double getSubDet(double *vals, int order) {
