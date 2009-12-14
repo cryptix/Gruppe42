@@ -6,3 +6,5 @@ matrix: main.o io.o tools.o matrix.o lgs.o
 
 clean:
 	rm -f *.o matrix
+objclean:
+	rm -f *.o
