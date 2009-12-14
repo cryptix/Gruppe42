@@ -4,19 +4,20 @@ static double  getSubDet(double*, int);
 static matrix* getSubMat(matrix*, unsigned int, unsigned int);
 
 double getDet(matrix *mat) {
-	double foo = getSubDet(mat->wert, mat->col);
-	mat->det = foo;
-	return foo;
+	double det = getSubDet(mat->wert, mat->col); /* Rekursive Determinantenberechnung */
+	mat->det = det;
+	return det;
 }
 
 static double getSubDet(double *vals, int order) {
-	int subOrder = order - 1;
+	int subOrder = order - 1; /* Rang der Untermartizen */
 	double *subVals;
 	double subDet = 0;
 	int i, j, off;
 
-	if (order == 1) return *vals;
+	if (order == 1) return *vals; /* Skalar ausgeben, wenn Rang der Matrix 1 ist */
 
+	/* Speicherplatz für Untermatrizen allozieren */
 	if ((subVals = (double *) malloc(sizeof(double) * subOrder * subOrder)) == NULL) {
 		fprintf(stderr, "Couldn't allocate memory.\n");
 		return 0;
@@ -25,12 +26,15 @@ static double getSubDet(double *vals, int order) {
 	for (i = 0; i < order; i++) {
 		off = 0;
 		for (j = 0; j < order * subOrder; j++) {
-			if ((j - i) % order != 0) {
-				subVals[j - off] = vals[order + j];
+			if ((j - i) % order != 0) { /* Jeweils eine Spalte streichen */
+				subVals[j - off] = vals[order + j]; /* Untermatrix erstellen */
 			} else {
-				off++;
+				off++; /* Übersprungene Elemente der getrichenen Spalten */
 			}
 		}
+		/* Unterdeterminanten rekursiv berechnen, mit Koeffizient multiplizieren und aufaddieren
+		 * Keine Rekursion, falls Koeffizient = 0
+		 */
 		subDet += ((i % 2 == 0) ? 1 : -1) * ((vals[i] == 0) ? 0 : vals[i] * getSubDet(subVals, subOrder));
 	}
 
