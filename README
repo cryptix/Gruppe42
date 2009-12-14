@@ -14,3 +14,7 @@ Mitglieder:
 Konventionen:
 	- Nur lauffähigen code pushen, der mit make keine errors oder warnings wirft!!
 	- Mergen nur beim pullen, nie beim pushen. Danach nochmal testen!!
+
+Coding Konventionen:
+	- Funktionen- und Variablennamen: Englisch und lowerCamelCase
+	- Textausgabe englisch!
