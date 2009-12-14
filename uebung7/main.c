@@ -32,7 +32,12 @@ int main(void) {
 				printf("det(A): %f\n", getDet(mat));
 				break;
 			case INVA:
-				printf("A inverted:\n");	
+				if(invert(mat) == 0) {
+					printf("Inverted matrix:\n");
+					printMat(mat);
+				} else {
+					printf("Couldn't invert matrix. det A = 0\n");
+				}
 				break;
 			case SOLVE:
 				printf("for Ax=b, x=%s\n", "");

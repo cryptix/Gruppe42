@@ -2,7 +2,7 @@ CFLAGS=-Wall -Wextra -pedantic -std=c89
 #CFLAGS+=-ggdb3
 #CC=clang
 
-main: main.o io.o tools.o matrix.o
+matrix: main.o io.o tools.o matrix.o
 
 clean:
-	rm -f *.o pi
+	rm -f *.o matrix
