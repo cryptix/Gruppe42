@@ -9,3 +9,8 @@ Mitglieder:
 - Henry Bubert	   
 - Jannik Theiﬂ	 
 - Jan Winkelmann
+
+
+Konventionen:
+	- Nur lauff‰higen code pushen, der mit make keine errors oder warnings wirft!!
+	- Mergen nur beim pullen, nie beim pushen. Danach nochmal testen!!
