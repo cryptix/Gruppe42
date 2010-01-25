@@ -1,4 +1,4 @@
-CFLAGS = -Wall -Wextra -pedantic -std=c89
+CFLAGS = -Wall -Wextra -pedantic -std=c89 -ggdb3
 
 SRC = main.c
 

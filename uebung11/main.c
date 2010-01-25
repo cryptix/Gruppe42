@@ -1,17 +1,20 @@
 #include <stdlib.h>
 
-void allocMat(char **A, int n);
+char **allocMat(int n);
 void freeMat(char **A, int n);
+
+void completeGraph(char **A, int n);
 
 int main() {
 	int n = 10;
 	char **A;
 
-	allocMat(A, n);
+	A = allocMat(n);
 
-	completeGrahp(A, n);
+	completeGraph(A, n);
 
-	freeMat(A);
+	freeMat(A, n);
+	A = NULL;
 
 	return 0;
 }
@@ -26,11 +29,9 @@ void completeGraph(char **A, int n) {
 	for (i = 0; i < n; i++) { /* alle spalten durchgehen */
 		for (j = 0; j < n; j++) new[j] = A[i][j]; /* spalte in new kopieren */
 
-		anyNew = 1;
+		anyNew = 0;
 
-		while (anyNew) {
-			anyNew = 0;
-
+		do {
 			for (j = 0; j < n; j++) { /* new durchgehen */
 				if (new[j] == 1) {
 					new[j] = 0;
@@ -44,13 +45,14 @@ void completeGraph(char **A, int n) {
 					}
 				}
 			}
-		}
+		} while (anyNew);
 	}
 
 	free(new);
 }
 
-void allocMat(char **A, int n) {
+char **allocMat(int n) {
+	char **A;
 	int i;
 
 	A = malloc(sizeof(char *) * n);
@@ -58,6 +60,8 @@ void allocMat(char **A, int n) {
 	for (i = 0; i < n; i++) {
 		A[i] = malloc(sizeof(char) * n);
 	}
+
+	return A;
 }
 
 void freeMat(char **A, int n) {
@@ -67,5 +71,5 @@ void freeMat(char **A, int n) {
 		free(A[i]);
 	}
 
-	free[A];
+	free(A);
 }
